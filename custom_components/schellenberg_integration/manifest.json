@@ -1,0 +1,13 @@
+{
+  "domain": "schellenberg_integration",
+  "name": "Schellenberg Integration",
+  "version": "0.1.0",
+  "documentation": "https://github.com/HomeZnCld/schellenberg-integration",
+  "dependencies": [],
+  "codeowners": ["@HomeZnCld"],
+  "requirements": ["pyserial-asyncio-fast==0.12"],
+  "iot_class": "local_push",
+  "config_flow": true,
+  "integration_type": "hub",
+  "loggers": ["schellenberg_integration"]
+}

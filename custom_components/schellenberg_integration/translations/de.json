@@ -1,0 +1,294 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Schellenberg USB-Stick",
+        "description": "Wähle den USB-Stick aus der Liste. Der stabile Gerätepfad wird automatisch verwendet.",
+        "data": {
+          "name": "Bezeichnung",
+          "serial_port": "USB-Gerät",
+          "send_repeat": "Sendewiederholungen (1–15)"
+        },
+        "data_description": {
+          "send_repeat": "Anzahl Sendewiederholungen pro Befehl. Höherer Wert = zuverlässiger. (Standard: 9)"
+        }
+      }
+    },
+    "abort": {
+      "no_serial_ports": "Keine seriellen Ports gefunden. Stelle sicher, dass der USB-Stick angeschlossen ist.",
+      "already_configured": "Dieses Gerät ist bereits konfiguriert."
+    },
+    "error": {
+      "cannot_connect": "Verbindung zum USB-Stick fehlgeschlagen."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Optionen",
+        "data": {
+          "send_repeat": "Sendewiederholungen (1–15)"
+        },
+        "data_description": {
+          "send_repeat": "Anzahl Sendewiederholungen pro Befehl. Höherer Wert = zuverlässiger. (Standard: 9)"
+        }
+      }
+    }
+  },
+  "selector": {
+    "entry_type": {
+      "options": {
+        "shutter": "Rollo",
+        "all": "Alle-Rollos-Steuerung",
+        "remote": "Fernbedienung"
+      }
+    },
+    "already_setup": {
+      "options": {
+        "yes": "Ja, bereits eingerichtet (per FB oder manuell)",
+        "no": "Nein, ich richte es zuerst ein und starte das Setup neu"
+      }
+    },
+    "already_paired": {
+      "options": {
+        "yes": "Ja, bereits mit dem USB-Stick gepaired",
+        "no": "Nein, jetzt pairen"
+      }
+    },
+    "paired": {
+      "options": {
+        "yes": "Ja, der Rollo hat reagiert",
+        "no": "Nein, keine Reaktion"
+      }
+    },
+    "calibrate_now": {
+      "options": {
+        "yes": "Ja, jetzt kalibrieren",
+        "no": "Nein, mache ich später"
+      }
+    },
+    "reconfigure_action": {
+      "options": {
+        "channel": "Kanal oder Name ändern",
+        "calibration": "Fahrtzeiten kalibrieren",
+        "signals": "Fernbedienungssignale aktualisieren",
+        "pair_all": "Mit Alle-Kanal koppeln"
+      }
+    },
+    "needs_pairing": {
+      "options": {
+        "yes": "Ja, jetzt Anlernbefehl senden",
+        "no": "Nein, bereits eingelernt"
+      }
+    },
+    "learn_all": {
+      "options": {
+        "yes": "Ja, ALLE-Befehl einlernen",
+        "no": "Nein, überspringen"
+      }
+    },
+    "remote_reconfigure_action": {
+      "options": {
+        "remote_name": "Name ändern",
+        "remote_id": "Fernbedienung neu einlernen (FB ersetzen)",
+        "signals": "Rollozuweisungen aktualisieren"
+      }
+    }
+  },
+  "config_subentries": {
+    "shutter": {
+      "name": "Eintrag hinzufügen",      
+      "flow_title": "{name}",
+      "step": {
+        "user": {
+          "title": "Was möchtest du hinzufügen?",
+          "description": "**Rollo**: Einzelnes Rollo hinzufügen mit eigenem Kanal und Kalibrierung.\n\n**Alle-Rollos-Steuerung**: Broadcast-Steuerung hinzufügen, die alle gepairten Rollos gleichzeitig auf einem gemeinsamen Kanal steuert.\n\n**Fernbedienung**: Physische Fernbedienung hinzufügen. Erstellt einen Sensor, der trackt welche Taste gedrückt wurde und welches Rollo betroffen ist — nutzbar in Automationen und sichtbar in der Historie.",
+          "data": {
+            "entry_type": "Typ"
+          }
+        },
+        "setup_mode": {
+          "title": "Rollo hinzufügen",
+          "description": "Gib einen Namen für dieses Rollo ein.",
+          "data": {
+            "name": "Name",
+            "already_setup": "Endpunkte und Fahrtrichtung müssen am Motor über die physische Fernbedienung eingestellt sein (siehe Bedienungsanleitung). Wurde das bereits gemacht?"
+          }
+        },
+        "pairing_status": {
+          "title": "Kanal & Pairing",
+          "description": "Gib den 2-stelligen Hex-Kanal dieses Rollos ein (z. B. 01, 0A, 1F, FF).",
+          "data": {
+            "channel": "Kanal (hex)",
+            "already_paired": "Wurde er bereits mit dem USB-Stick gepaired?"
+          },
+          "data_description": {
+            "channel": "Gültiger Bereich: 01–FF"
+          }
+        },
+        "pair_quick": {
+          "title": "Anlernbefehl senden",
+          "description": "Versetz den Rollo-Motor in den Anlernmodus (gemäss Bedienungsanleitung). Klicke dann auf Weiter um den Anlernbefehl zu senden. Beobachte den Rollo — er sollte mit einem Piepton oder einer kurzen Bewegung reagieren."
+        },
+        "pair_confirm": {
+          "title": "Pairing bestätigen",
+          "description": "Hat der Rollo auf den Anlernbefehl reagiert? (Piepton oder kurze Bewegung)",
+          "data": {
+            "paired": "Reaktion des Rollos"
+          }
+        },
+        "channel": {
+          "title": "Rollo einrichten",
+          "description": "Gib den gewünschten 2-stelligen Hex-Kanal dieses Rollos ein (z. B. 01, 0A, 1F, FF). Stelle sicher, dass Endpunkte und Fahrtrichtung am Motor bereits über die physische Fernbedienung eingestellt wurden.",
+          "data": {
+            "name": "Name",
+            "channel": "Kanal (hex)"
+          },
+          "data_description": {
+            "channel": "Gültiger Bereich: 01–FF"
+          }
+        },
+        "pairing": {
+          "title": "Anlernmodus",
+          "description": "Versetz den Rollo-Motor in den Anlernmodus (Anlern-Taste am Motor drücken). Trag dann den zugewiesenen Kanal (hex) ein und bestätige.",
+          "data": {
+            "channel": "Kanal (hex)",
+            "send_pair": "Anlernbefehl senden"
+          }
+        },
+        "calibration_prompt": {
+          "title": "Kalibrierung",
+          "description": "Die Fahrtzeiten werden für eine genaue Positionsanzeige benötigt. Möchtest du jetzt kalibrieren?",
+          "data": {
+            "calibrate_now": "Fahrtzeiten kalibrieren"
+          }
+        },
+        "calibration_intro": {
+          "title": "Kalibrierung",
+          "description": "Der Rollo fährt automatisch in beide Richtungen, um die Fahrtzeiten zu messen.\n\n**Ablauf:**\n- Du wählst die Startrichtung (hoch oder runter)\n- Der Rollo startet sofort nach dem Klick auf Weiter\n- Wenn er die Endposition erreicht hat, auf Weiter klicken — Zeit wird gespeichert\n- Danach fährt er automatisch in die Gegenrichtung\n- Wieder auf Weiter klicken, wenn die Endposition erreicht ist\n\nStelle sicher, dass der Rollo vor dem Start an einer der beiden Endpositionen steht.",
+          "data": {
+            "skip": "Kalibrierung überspringen (Standardwerte verwenden)"
+          }
+        },
+        "calibration_direction": {
+          "title": "Kalibrierung — Startrichtung wählen",
+          "description": "Wähle die Richtung, in die der Rollo zuerst fahren soll, und klicke auf Weiter.",
+          "data": {
+            "direction": "Startrichtung"
+          }
+        },
+        "calibration_wait": {
+          "title": "Kalibrierung — Fahrt {direction_arrow}",
+          "description": "Der Rollo fährt gerade. Klicke auf Weiter, sobald er die Endposition vollständig erreicht hat."
+        },
+        "calibration_done": {
+          "title": "Kalibrierung abgeschlossen",
+          "description": "Die Fahrtzeiten wurden erfolgreich gespeichert.\n\n- Hoch: **{time_up} s**\n- Runter: **{time_down} s**"
+        },
+        "signal_select_shutters": {
+          "title": "Rollos auswählen",
+          "description": "Wähle die Rollos aus, für die du eine Fernbedienung einlernen möchtest.",
+          "data": {
+            "shutter_ids": "Rollos"
+          }
+        },
+        "signal_wait": {
+          "title": "Taste drücken",
+          "description": "Drücke **{label}** auf der Fernbedienung, dann klicke auf Weiter."
+        },
+        "signal_summary": {
+          "title": "Gelernte Signale",
+          "description": "Folgende Signale wurden eingelernt:\n\n{summary}"
+        },
+        "signal_all_prompt": {
+          "title": "ALLE-Befehle",
+          "description": "Möchtest du auch einen ALLE-Befehl einlernen (für alle Rollos gleichzeitig)?",
+          "data": {
+            "learn_all": "ALLE-Befehl einlernen"
+          }
+        },
+        "reconfigure_menu": {
+          "title": "Was möchtest du ändern?",
+          "data": {
+            "reconfigure_action": "Aktion"
+          }
+        },
+        "all_channel": {
+          "title": "Alle-Rollos einrichten",
+          "description": "Wähle einen Namen und weise einen dedizierten Hex-Kanal für diese Gruppe (z.B. 01, 0A, 1F, FF). Alle Rollos müssen auf diesen Kanal eingelernt sein, damit sie auf die Broadcast-Befehle reagieren.\n\nWenn die Rollos bereits mit diesem Kanal gepaired wurden (z.B. während eines früheren Setups), wähle unten Ja. Andernfalls wähle Nein, um den Kopplungsvorgang jetzt zu starten.",
+          "data": {
+            "name": "Name",
+            "channel": "Kanal (hex)",
+            "already_paired": "Sind die gewählten Rollos bereits mit diesem Kanal gepaired?"
+          },
+          "data_description": {
+            "channel": "Gültiger Bereich: 01–FF"
+          }
+        },
+        "pair_shutter": {
+          "title": "Rollo {current} von {total} einlernen",
+          "description": "**{shutter_name}** wird jetzt mit dem Alle-Kanal eingelernt.\n\nDie Integration sendet den Anlernbefehl an diesen Rollo. Klicke auf Weiter um fortzufahren."
+        },
+        "pair_all": {
+          "title": "Mit Alle-Kanal koppeln",
+          "description": "Dieses Rollo **{shutter_name}** wird mit der Alle-Kanal-Gruppe **{all_name}** gepaired.\n\nStelle sicher, dass der Rollomotor eingeschaltet und in Reichweite ist, dann klicke auf Weiter."
+        },
+        "pair_quick_reconf": {
+          "title": "Anlernbefehl senden",
+          "description": "Versetz den Rollomotor in den Anlernmodus (gemäss Bedienungsanleitung). Klicke dann auf Weiter um den Anlernbefehl zu senden."
+        },
+        "pairing_check": {
+          "title": "Neu einlernen?",
+          "description": "Der Kanal wurde geändert. Muss dieser Rollo auf dem neuen Kanal neu mit dem USB-Stick eingelernt werden?",
+          "data": {
+            "needs_pairing": "Rollo neu einlernen"
+          }
+        },
+        "pair_confirm_reconf": {
+          "title": "Pairing bestätigen",
+          "description": "Hat der Rollo auf den Anlernbefehl reagiert? (Piepton oder kurze Bewegung)",
+          "data": {
+            "paired": "Reaktion des Rollos"
+          }
+        },
+        "remote_setup": {
+          "title": "Fernbedienung hinzufügen",
+          "description": "Gib einen Namen für diese Fernbedienung ein.",
+          "data": {
+            "name": "Name"
+          }
+        },
+        "remote_id_wait": {
+          "title": "Fernbedienung erkennen",
+          "description": "Drücke die **STOP**-Taste auf der Fernbedienung, dann klicke auf Weiter."
+        },
+        "remote_id_confirm": {
+          "title": "Fernbedienung erkannt",
+          "description": "Folgende Fernbedienung wurde erkannt:\n\n**Remote ID:** {remote_id}\n\nWeiter zur Zuweisung der Tasten zu Rollos."
+        },
+        "remote_reconfigure_menu": {
+          "title": "Was möchtest du ändern?",
+          "data": {
+            "reconfigure_action": "Aktion"
+          }
+        }
+      },
+      "error": {
+        "invalid_channel": "Ungültiges Kanalformat. Bitte einen Hexadezimalwert eingeben (z. B. 0A).",
+        "channel_in_use": "Dieser Kanal ist bereits einem anderen Rollo zugewiesen. Bitte einen anderen Kanal wählen.",
+        "no_direction_selected": "Bitte eine Richtung wählen oder 'Kalibrierung überspringen' aktivieren.",
+        "no_signal_received": "Kein Signal empfangen. Drücke die Taste auf der Fernbedienung, dann klicke auf Weiter.",
+        "no_shutter_selected": "Bitte mindestens einen Rolladen auswählen."
+      },
+      "abort": {
+        "not_enough_shutters": "Es müssen mindestens 2 Rollos konfiguriert sein bevor eine Alle-Rollos-Entität erstellt werden kann.",
+        "motor_not_configured": "Der Motor muss zuerst über die physische Fernbedienung konfiguriert werden. Bitte die Bedienungsanleitung befolgen und das Setup danach neu starten.",
+        "pairing_failed": "Der Rollo hat nicht reagiert. Stelle sicher, dass er im Anlernmodus ist, und starte das Setup neu.",
+        "reconfigure_successful": "Einstellungen wurden erfolgreich aktualisiert.",
+        "all_already_exists": "Eine Alle-Rollos-Steuerung existiert bereits für diesen USB-Stick. Pro Gerät ist nur eine erlaubt.",
+        "pair_all_successful": "Rollo erfolgreich mit dem Alle-Kanal gepaired.",
+        "unknown": "Ein unerwarteter Fehler ist aufgetreten."
+      }
+    }
+  }
+}

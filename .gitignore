@@ -1,0 +1,16 @@
+.env
+*.pyc
+__pycache__/
+.storage/
+usb_paths.yaml
+*.log
+CURRENT_STATE.md
+TARGET.md
+GIT_GUIDELINES.md
+CLAUDE_RULES.md
+*.code-workspace
+MEMORY.md
+schellenberg_history.bundle
+.vscode/
+.claude/
+.docs/

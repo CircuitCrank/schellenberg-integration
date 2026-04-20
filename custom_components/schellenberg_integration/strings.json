@@ -1,0 +1,291 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Schellenberg USB Stick",
+        "description": "Select the USB stick from the list. The stable device path will be used automatically.",
+        "data": {
+          "name": "Name",
+          "serial_port": "USB Device",
+          "send_repeat": "Send Repeat (1–15)"
+        },
+        "data_description": {
+          "send_repeat": "How many times each command is sent. Higher values improve reliability on weak signals. (default = 9)"
+        }
+      }
+    },
+    "abort": {
+      "no_serial_ports": "No serial ports found. Make sure the USB stick is connected.",
+      "already_configured": "This device is already configured."
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the USB stick."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options",
+        "data": {
+          "send_repeat": "Send Repeat (1–15)"
+        }
+      }
+    }
+  },
+  "selector": {
+    "entry_type": {
+      "options": {
+        "shutter": "Roller Shutter",
+        "all": "All-Shutters Control",
+        "remote": "Remote Control"
+      }
+    },
+    "already_setup": {
+      "options": {
+        "yes": "Yes, already set up (via remote or manual programming)",
+        "no": "No, I will configure it first and restart the setup"
+      }
+    },
+    "already_paired": {
+      "options": {
+        "yes": "Yes, already paired with the USB stick",
+        "no": "No, pair now"
+      }
+    },
+    "paired": {
+      "options": {
+        "yes": "Yes, the shutter responded",
+        "no": "No, it did not respond"
+      }
+    },
+    "calibrate_now": {
+      "options": {
+        "yes": "Yes, calibrate now",
+        "no": "No, I will do it later"
+      }
+    },
+    "reconfigure_action": {
+      "options": {
+        "channel": "Change channel or name",
+        "calibration": "Calibrate travel times",
+        "signals": "Update remote signals",
+        "pair_all": "Pair with All-channel"
+      }
+    },
+    "needs_pairing": {
+      "options": {
+        "yes": "Yes, send pairing command now",
+        "no": "No, already paired"
+      }
+    },
+    "learn_all": {
+      "options": {
+        "yes": "Yes, learn ALL command",
+        "no": "No, skip"
+      }
+    },
+    "remote_reconfigure_action": {
+      "options": {
+        "remote_name": "Change name",
+        "remote_id": "Re-learn remote (replace remote control)",
+        "signals": "Update shutter signal assignments"
+      }
+    }
+  },
+  "config_subentries": {
+    "shutter": {
+      "name": "Add Entry",   
+      "flow_title": "{name}",
+      "step": {
+        "user": {
+          "title": "What would you like to add?",
+          "description": "**Roller Shutter**: Add and configure a single shutter with its own channel and calibration.\n\n**All-Shutters Control**: Add a broadcast control that operates all paired shutters simultaneously on a shared channel.\n\n**Remote Control**: Add a physical remote control. Creates a sensor that tracks which button was pressed and on which shutter — usable in automations and visible in the history.",
+          "data": {
+            "entry_type": "Type"
+          }
+        },
+        "setup_mode": {
+          "title": "Add Shutter",
+          "description": "Enter a name for this shutter.",
+          "data": {
+            "name": "Name",
+            "already_setup": "End positions and travel direction must be configured on the motor via the physical remote (see user manual). Have you done this?"
+          }
+        },
+        "pairing_status": {
+          "title": "Channel & Pairing",
+          "description": "Enter the 2-digit hex channel assigned to this shutter (e.g. 01, 0A, 1F, FF).",
+          "data": {
+            "channel": "Channel (hex)",
+            "already_paired": "Was it already paired with the USB stick?"
+          },
+          "data_description": {
+            "channel": "Valid range: 01–FF"
+          }
+        },
+        "pair_quick": {
+          "title": "Send Pairing Command",
+          "description": "Put the shutter motor into pairing mode (according to the user manual). Then click Submit to send the pairing command. Watch the shutter — it should respond with a beep or brief movement."
+        },
+        "pair_confirm": {
+          "title": "Pairing Confirmation",
+          "description": "Did the shutter respond to the pairing command? (beep or brief movement)",
+          "data": {
+            "paired": "Shutter response"
+          }
+        },
+        "channel": {
+          "title": "Shutter Setup",
+          "description": "Enter the 2-digit hex channel you want to assign to this shutter (e.g. 01, 0A, 1F, FF). Make sure end positions and travel direction are already configured on the motor via the physical remote.",
+          "data": {
+            "name": "Name",
+            "channel": "Channel (hex)"
+          },
+          "data_description": {
+            "channel": "Valid range: 01–FF"
+          }
+        },
+        "pairing": {
+          "title": "Pairing Mode",
+          "description": "Set the shutter to pairing mode by pressing the pairing button on the motor. Then enter the assigned channel (hex) and confirm.",
+          "data": {
+            "channel": "Channel (hex)",
+            "send_pair": "Send pairing command"
+          }
+        },
+        "calibration_prompt": {
+          "title": "Calibration",
+          "description": "Travel times are required for accurate position tracking. Do you want to calibrate now?",
+          "data": {
+            "calibrate_now": "Calibrate travel times"
+          }
+        },
+        "calibration_intro": {
+          "title": "Calibration",
+          "description": "The shutter will move automatically in both directions to measure the travel times.\n\n**What will happen:**\n- You choose the start direction (up or down)\n- The shutter starts moving immediately after you click Submit\n- When it reaches the end position, click Submit to stop and measure\n- It then automatically moves in the opposite direction\n- Click Submit again when it reaches that end position\n\nMake sure the shutter is at one of the two end positions before continuing.",
+          "data": {
+            "skip": "Skip calibration (use default values)"
+          }
+        },
+        "calibration_direction": {
+          "title": "Calibration — Choose Start Direction",
+          "description": "Select the direction the shutter should move first, then click Submit.",
+          "data": {
+            "direction": "Start direction"
+          }
+        },
+        "calibration_wait": {
+          "title": "Calibration — Moving {direction_arrow}",
+          "description": "The shutter is moving. Click Submit when it has fully reached the end position."
+        },
+        "calibration_done": {
+          "title": "Calibration Complete",
+          "description": "Travel times have been saved successfully.\n\n- Up: **{time_up} s**\n- Down: **{time_down} s**"
+        },
+        "signal_select_shutters": {
+          "title": "Select Shutters",
+          "description": "Select the shutters you want to teach the remote for.",
+          "data": {
+            "shutter_ids": "Shutters"
+          }
+        },
+        "signal_wait": {
+          "title": "Press Button",
+          "description": "Press **{label}** on the remote, then click Submit."
+        },
+        "signal_summary": {
+          "title": "Learned Signals",
+          "description": "The following signals were learned:\n\n{summary}"
+        },
+        "signal_all_prompt": {
+          "title": "ALL Commands",
+          "description": "Do you also want to learn an ALL command (for all shutters at once)?",
+          "data": {
+            "learn_all": "Learn ALL command"
+          }
+        },
+        "reconfigure_menu": {
+          "title": "What would you like to change?",
+          "data": {
+            "reconfigure_action": "Action"
+          }
+        },
+        "all_channel": {
+          "title": "All-Shutters Setup",
+          "description": "Choose a name and assign a dedicated hex channel for this group (e.g. 01, 0A, 1F, FF). All shutters must be paired to this channel so they respond to the broadcast commands.\n\nIf you have already paired the shutters with this channel (e.g. in previous setup), select Yes below. Otherwise select No to start the pairing process now.",
+          "data": {
+            "name": "Name",
+            "channel": "Channel (hex)",
+            "already_paired": "Are the selected shutters already paired with this channel?"
+          },
+          "data_description": {
+            "channel": "Valid range: 01–FF"
+          }
+        },
+        "pair_shutter": {
+          "title": "Pairing Shutter {current} of {total}",
+          "description": "Ready to pair **{shutter_name}** with the All channel.\n\nThe integration will now send a pairing command to this shutter. Click Submit to proceed."
+        },
+        "pair_all": {
+          "title": "Pair with All-Channel",
+          "description": "This will pair **{shutter_name}** with the All-channel group **{all_name}**.\n\nMake sure the shutter motor is powered and within range, then click Submit."
+        },
+        "pair_quick_reconf": {
+          "title": "Send Pairing Command",
+          "description": "Put the shutter motor into pairing mode (according to the user manual). Then click Submit to send the pairing command."
+        },
+        "pairing_check": {
+          "title": "Pairing Required?",
+          "description": "The channel has been changed. Does this shutter need to be re-paired with the USB stick on the new channel?",
+          "data": {
+            "needs_pairing": "Re-pair shutter"
+          }
+        },
+        "pair_confirm_reconf": {
+          "title": "Pairing Confirmation",
+          "description": "Did the shutter respond to the pairing command? (beep or brief movement)",
+          "data": {
+            "paired": "Shutter response"
+          }
+        },
+        "remote_setup": {
+          "title": "Add Remote Control",
+          "description": "Enter a name for this remote control.",
+          "data": {
+            "name": "Name"
+          }
+        },
+        "remote_id_wait": {
+          "title": "Identify Remote",
+          "description": "Press the **STOP** button on the remote, then click Submit."
+        },
+        "remote_id_confirm": {
+          "title": "Remote Identified",
+          "description": "The following remote was detected:\n\n**Remote ID:** {remote_id}\n\nContinue to assign its buttons to shutters."
+        },
+        "remote_reconfigure_menu": {
+          "title": "What would you like to change?",
+          "data": {
+            "reconfigure_action": "Action"
+          }
+        }
+      },
+      "error": {
+        "invalid_channel": "Invalid channel format. Enter a hexadecimal value (e.g. 0A).",
+        "channel_in_use": "This channel is already assigned to another shutter. Choose a different channel.",
+        "no_direction_selected": "Please select a direction or check 'Skip calibration'.",
+        "no_signal_received": "No signal received. Press the button on the remote, then click Submit.",
+        "no_shutter_selected": "Please select at least one shutter."
+      },
+      "abort": {
+        "not_enough_shutters": "At least 2 shutters must be configured before creating an All-Shutters entity.",
+        "motor_not_configured": "The motor must be configured via the physical remote before adding it here. Please follow the user manual, then restart the setup.",
+        "pairing_failed": "The shutter did not respond. Make sure it is in pairing mode and restart the setup.",
+        "reconfigure_successful": "Settings updated successfully.",
+        "all_already_exists": "An All-Shutters control already exists for this USB stick. Only one is allowed per device.",
+        "pair_all_successful": "Shutter successfully paired with the All-channel.",
+        "unknown": "An unexpected error occurred."
+      }
+    }
+  }
+}
