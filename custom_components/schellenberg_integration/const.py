@@ -1,0 +1,50 @@
+DOMAIN = "schellenberg_integration"
+MANUFACTURER = "Schellenberg"
+
+CONF_SERIAL_PORT = "serial_port"
+CONF_SEND_REPEAT = "send_repeat"
+CONF_CHANNEL = "channel"
+CONF_NAME = "name"
+CONF_TRAVEL_TIME_UP = "travel_time_up"
+CONF_TRAVEL_TIME_DOWN = "travel_time_down"
+CONF_SIGNAL_UP = "signal_up"
+CONF_SIGNAL_DOWN = "signal_down"
+CONF_SIGNAL_STOP = "signal_stop"
+CONF_SIGNAL_ALL_UP = "signal_all_up"
+CONF_SIGNAL_ALL_DOWN = "signal_all_down"
+CONF_SIGNAL_ALL_STOP = "signal_all_stop"
+CONF_LAST_POSITION = "last_position"
+
+SUBENTRY_TYPE_SHUTTER = "shutter"
+SUBENTRY_TYPE_ALL = "all"
+SUBENTRY_TYPE_REMOTE = "remote"
+
+DEFAULT_BAUD_RATE = 9600
+DEFAULT_SEND_REPEAT = 9
+DEFAULT_TRAVEL_TIME = 30
+MIN_SEND_REPEAT = 1
+MAX_SEND_REPEAT = 15
+MIN_TRAVEL_TIME = 5
+MAX_TRAVEL_TIME = 120
+
+SERIAL_TIMEOUT = 2.0
+COMMAND_TIMEOUT = 3.0
+
+CONF_REMOTE_ID = "remote_id"
+
+USB_MODE_INITIAL = "B:1"
+USB_MODE_LISTENING = "B:2"
+USB_PREFIX = "ss"
+
+CMD_STOP = 0x00
+CMD_UP = 0x01
+CMD_DOWN = 0x02
+CMD_PAIR_ALLOW = 0x40
+CMD_PAIR = 0x60
+
+ACK_TX_ON = "t1"
+ACK_TX_OFF = "t0"
+ACK_TX_ERROR = "tE"
+
+POSITION_OPEN = 100
+POSITION_CLOSED = 0
