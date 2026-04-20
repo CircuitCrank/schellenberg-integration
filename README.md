@@ -51,28 +51,28 @@ Control Schellenberg roller shutters via USB stick directly from Home Assistant,
 
 **1. Add Integration**
 
-Go to **Settings → Devices & Services → Add Integration** and search for **Schellenberg USB - Roller Shutters**. You will be asked to enter a name, choose the USB device from the dropdown and a send repeat count.
+Go to **Settings → Devices & Services → Add Integration** and search for **Schellenberg Integration**. You will be asked to enter a name, choose the USB device from the dropdown and a send repeat count.
 
 The USB-Stick will be added as a device with a "USB Raw" sensor entity.
 
 **2. Add Shutters**
 
-Go to **Settings → Devices & Services → Integrations → Schellenberg USB - Roller Shutters** and click the **`+`** button (top right).
+Go to **Settings → Devices & Services → Integrations → Schellenberg Integration** and click the **`+`** button (top right).
 Select type **Roller Shutter** and follow the guided setup — pair the shutter if needed, then run the calibration wizard which measures the full travel time in both directions.
 
 **3. All-Shutters Control (optional)**
 
-Go to **Settings → Devices & Services → Integrations → Schellenberg USB - Roller Shutters** and click the **`+`** button (top right).
+Go to **Settings → Devices & Services → Integrations → Schellenberg Integration** and click the **`+`** button (top right).
 Select type **All-Shutters Control** to create a control entity that broadcasts to all shutters on a dedicated channel.
 
 **4. Remote Control (optional)**
 
-Go to **Settings → Devices & Services → Integrations → Schellenberg USB - Roller Shutters** and click the **`+`** button (top right).
+Go to **Settings → Devices & Services → Integrations → Schellenberg Integration** and click the **`+`** button (top right).
 Select type **Remote Control** to add a sensor that listens for incoming signals from physical Schellenberg remotes and keeps the shutter positions in Home Assistant in sync.
 
 ## Reconfiguration
 
-All settings can be changed later via **Settings → Devices & Services → Integrations → Schellenberg USB - Roller Shutters**. Click the **⚙** icon next to the entry you want to reconfigure.
+All settings can be changed later via **Settings → Devices & Services → Integrations → Schellenberg Integration**. Click the **⚙** icon next to the entry you want to reconfigure.
 
 ## Troubleshooting
 
