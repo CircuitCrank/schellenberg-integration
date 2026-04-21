@@ -90,6 +90,12 @@
         "remote_id": "Re-learn remote (replace remote control)",
         "signals": "Update shutter signal assignments"
       }
+    },
+    "direction": {
+      "options": {
+        "up": "Up",
+        "down": "Down"
+      }
     }
   },
   "config_subentries": {
@@ -191,7 +197,7 @@
         },
         "signal_wait": {
           "title": "Press Button",
-          "description": "Press **{label}** on the remote, then click Submit to capture the signal."
+          "description": "Press the **{label}** button on the remote, then click Submit to capture the signal."
         },
         "signal_summary": {
           "title": "Learned Signals",
@@ -224,7 +230,7 @@
         },
         "pair_shutter": {
           "title": "Pairing Shutter {current} of {total}",
-          "description": "Ready to pair **{shutter_name}** with the All channel.\n\nClick Submit to send the pairing command. The shutter should respond with a beep or brief movement. The setup will then automatically continue with the next shutter."
+          "description": "Ready to pair **{shutter_name}** with the All channel.\n\nClick Submit to send the pairing command. The shutter should respond with a beep or brief movement."
         },
         "pair_all": {
           "title": "Pair with All-Channel",

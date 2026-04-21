@@ -93,6 +93,12 @@
         "remote_id": "Fernbedienung neu einlernen (FB ersetzen)",
         "signals": "Rollozuweisungen aktualisieren"
       }
+    },
+    "direction": {
+      "options": {
+        "up": "Hoch",
+        "down": "Runter"
+      }
     }
   },
   "config_subentries": {
@@ -194,7 +200,7 @@
         },
         "signal_wait": {
           "title": "Taste drücken",
-          "description": "Drücke **{label}** auf der Fernbedienung und klicke dann auf OK, um das Signal zu erfassen."
+          "description": "Drücke die **{label}**-Taste auf der Fernbedienung und klicke dann auf OK."
         },
         "signal_summary": {
           "title": "Gelernte Signale",
@@ -227,7 +233,7 @@
         },
         "pair_shutter": {
           "title": "Rollo {current} von {total} einlernen",
-          "description": "Bereit zum Koppeln von **{shutter_name}** mit dem Alle-Kanal.\n\nKlicke auf OK, um den Kopplungsbefehl zu senden. Der Rollladen sollte mit einem Piepton oder einer kurzen Bewegung reagieren. Die Einrichtung wird danach automatisch mit dem nächsten Rollladen fortgesetzt."
+          "description": "Bereit zum Koppeln von **{shutter_name}** mit dem Alle-Kanal.\n\nKlicke auf OK, um den Kopplungsbefehl zu senden. Der Rollladen sollte mit einem Piepton oder einer kurzen Bewegung reagieren."
         },
         "pair_all": {
           "title": "Mit Alle-Kanal koppeln",

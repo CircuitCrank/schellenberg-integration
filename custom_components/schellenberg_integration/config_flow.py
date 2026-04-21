@@ -461,7 +461,11 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
         return self.async_show_form(
             step_id="calibration_direction",
             data_schema=vol.Schema({
-                vol.Optional("direction"): vol.In(["up", "down"]),
+                vol.Optional("direction"): SelectSelector(SelectSelectorConfig(
+                    options=["up", "down"],
+                    mode=SelectSelectorMode.LIST,
+                    translation_key="direction",
+                )),
             }),
             errors=errors,
         )
