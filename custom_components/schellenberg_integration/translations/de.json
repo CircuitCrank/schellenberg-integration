@@ -128,7 +128,7 @@
         },
         "pair_quick": {
           "title": "Anlernbefehl senden",
-          "description": "Versetz den Rollo-Motor in den Anlernmodus (gemäss Bedienungsanleitung). Klicke dann auf Weiter um den Anlernbefehl zu senden. Beobachte den Rollo — er sollte mit einem Piepton oder einer kurzen Bewegung reagieren."
+          "description": "Versetz den Rollo-Motor in den Anlernmodus (gemäss Bedienungsanleitung). Klicke dann auf OK um den Anlernbefehl zu senden. Beobachte den Rollo — er sollte mit einem Piepton oder einer kurzen Bewegung reagieren."
         },
         "pair_confirm": {
           "title": "Pairing bestätigen",
@@ -165,21 +165,21 @@
         },
         "calibration_intro": {
           "title": "Kalibrierung",
-          "description": "Der Rollo fährt automatisch in beide Richtungen, um die Fahrtzeiten zu messen.\n\n**Ablauf:**\n- Du wählst die Startrichtung (hoch oder runter)\n- Der Rollo startet sofort nach dem Klick auf Weiter\n- Wenn er die Endposition erreicht hat, auf Weiter klicken — Zeit wird gespeichert\n- Danach fährt er automatisch in die Gegenrichtung\n- Wieder auf Weiter klicken, wenn die Endposition erreicht ist\n\nStelle sicher, dass der Rollo vor dem Start an einer der beiden Endpositionen steht.",
+          "description": "Der Rollo fährt automatisch in beide Richtungen, um die Fahrtzeiten zu messen.\n\n**Ablauf:**\n- Du wählst die Startrichtung (hoch oder runter)\n- Der Rollo startet sofort nach dem Klick auf OK\n- Wenn er die Endposition erreicht hat, auf OK klicken — Zeit wird gespeichert\n- Danach fährt er automatisch in die Gegenrichtung\n- Wieder auf OK klicken, wenn die Endposition erreicht ist\n\nStelle sicher, dass der Rollo vor dem Start an einer der beiden Endpositionen steht.",
           "data": {
             "skip": "Kalibrierung überspringen (Standardwerte verwenden)"
           }
         },
         "calibration_direction": {
           "title": "Kalibrierung — Startrichtung wählen",
-          "description": "Wähle die Richtung, in die der Rollo zuerst fahren soll, und klicke auf Weiter.",
+          "description": "Wähle die Richtung, in die der Rollo zuerst fahren soll, und klicke auf OK.",
           "data": {
             "direction": "Startrichtung"
           }
         },
         "calibration_wait": {
           "title": "Kalibrierung — Fahrt {direction_arrow}",
-          "description": "Der Rollo fährt gerade. Klicke auf Weiter, sobald er die Endposition vollständig erreicht hat."
+          "description": "Der Rollo fährt gerade. Klicke auf OK, sobald er die Endposition vollständig erreicht hat."
         },
         "calibration_done": {
           "title": "Kalibrierung abgeschlossen",
@@ -194,7 +194,7 @@
         },
         "signal_wait": {
           "title": "Taste drücken",
-          "description": "Drücke **{label}** auf der Fernbedienung, dann klicke auf Weiter."
+          "description": "Drücke **{label}** auf der Fernbedienung, dann klicke auf OK."
         },
         "signal_summary": {
           "title": "Gelernte Signale",
@@ -227,15 +227,15 @@
         },
         "pair_shutter": {
           "title": "Rollo {current} von {total} einlernen",
-          "description": "**{shutter_name}** wird jetzt mit dem Alle-Kanal eingelernt.\n\nDie Integration sendet den Anlernbefehl an diesen Rollo. Klicke auf Weiter um fortzufahren."
+          "description": "**{shutter_name}** wird jetzt mit dem Alle-Kanal eingelernt.\n\nDie Integration sendet den Anlernbefehl an diesen Rollo. Klicke auf OK um fortzufahren."
         },
         "pair_all": {
           "title": "Mit Alle-Kanal koppeln",
-          "description": "Dieses Rollo **{shutter_name}** wird mit der Alle-Kanal-Gruppe **{all_name}** gepaired.\n\nStelle sicher, dass der Rollomotor eingeschaltet und in Reichweite ist, dann klicke auf Weiter."
+          "description": "Dieses Rollo **{shutter_name}** wird mit der Alle-Kanal-Gruppe **{all_name}** gepaired.\n\nStelle sicher, dass der Rollomotor eingeschaltet und in Reichweite ist, dann klicke auf OK."
         },
         "pair_quick_reconf": {
           "title": "Anlernbefehl senden",
-          "description": "Versetz den Rollomotor in den Anlernmodus (gemäss Bedienungsanleitung). Klicke dann auf Weiter um den Anlernbefehl zu senden."
+          "description": "Versetz den Rollomotor in den Anlernmodus (gemäss Bedienungsanleitung). Klicke dann auf OK um den Anlernbefehl zu senden."
         },
         "pairing_check": {
           "title": "Neu einlernen?",
@@ -260,11 +260,11 @@
         },
         "remote_id_wait": {
           "title": "Fernbedienung erkennen",
-          "description": "Drücke die **STOP**-Taste auf der Fernbedienung, dann klicke auf Weiter."
+          "description": "Drücke die **STOP**-Taste auf der Fernbedienung, dann klicke auf OK."
         },
         "remote_id_confirm": {
           "title": "Fernbedienung erkannt",
-          "description": "Folgende Fernbedienung wurde erkannt:\n\n**Remote ID:** {remote_id}\n\nWeiter zur Zuweisung der Tasten zu Rollos."
+          "description": "Folgende Fernbedienung wurde erkannt:\n\n**Remote ID:** {remote_id}\n\nOK zur Zuweisung der Tasten zu Rollos."
         },
         "remote_reconfigure_menu": {
           "title": "Was möchtest du ändern?",
@@ -277,7 +277,7 @@
         "invalid_channel": "Ungültiges Kanalformat. Bitte einen Hexadezimalwert eingeben (z. B. 0A).",
         "channel_in_use": "Dieser Kanal ist bereits einem anderen Rollo zugewiesen. Bitte einen anderen Kanal wählen.",
         "no_direction_selected": "Bitte eine Richtung wählen oder 'Kalibrierung überspringen' aktivieren.",
-        "no_signal_received": "Kein Signal empfangen. Drücke die Taste auf der Fernbedienung, dann klicke auf Weiter.",
+        "no_signal_received": "Kein Signal empfangen. Drücke die Taste auf der Fernbedienung, dann klicke auf OK.",
         "no_shutter_selected": "Bitte mindestens einen Rolladen auswählen."
       },
       "abort": {
