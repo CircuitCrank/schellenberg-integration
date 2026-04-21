@@ -3,14 +3,14 @@
     "step": {
       "user": {
         "title": "Schellenberg USB-Stick",
-        "description": "Wähle den USB-Stick aus der Liste. Der stabile Gerätepfad wird automatisch verwendet.",
+        "description": "Wähle den USB-Stick aus der Liste.",
         "data": {
           "name": "Bezeichnung",
           "serial_port": "USB-Gerät",
           "send_repeat": "Sendewiederholungen (1–15)"
         },
         "data_description": {
-          "send_repeat": "Anzahl Sendewiederholungen pro Befehl. Höherer Wert = zuverlässiger. (Standard: 9)"
+          "send_repeat": "Anzahl Sendewiederholungen pro Befehl. (Standard: 9)\nHöherer Wert = zuverlässiger\nNiedriger Wert = schneller"
         }
       }
     },
@@ -102,17 +102,17 @@
       "step": {
         "user": {
           "title": "Was möchtest du hinzufügen?",
-          "description": "**Rollo**: Einzelnes Rollo hinzufügen mit eigenem Kanal und Kalibrierung.\n\n**Alle-Rollos-Steuerung**: Broadcast-Steuerung hinzufügen, die alle gepairten Rollos gleichzeitig auf einem gemeinsamen Kanal steuert.\n\n**Fernbedienung**: Physische Fernbedienung hinzufügen. Erstellt einen Sensor, der trackt welche Taste gedrückt wurde und welches Rollo betroffen ist — nutzbar in Automationen und sichtbar in der Historie.",
+          "description": "**Rollo**: Einzelnes Rollo hinzufügen mit eigenem Kanal und Kalibrierung.\n\n**Alle-Rollos-Steuerung**: Broadcast-Steuerung hinzufügen, die alle gepairten Rollos gleichzeitig auf einem gemeinsamen Kanal steuert.\n\n**Fernbedienung**: Physische Fernbedienung hinzufügen. Weist ihre Tasten den Rollläden zu — Tastendrücke werden im Rollladenstatus berücksichtigt.",
           "data": {
             "entry_type": "Typ"
           }
         },
         "setup_mode": {
           "title": "Rollo hinzufügen",
-          "description": "Gib einen Namen für dieses Rollo ein.",
+          "description": "Gib einen Namen für diesen Rollladen ein.\n\nStelle sicher, dass die Endpositionen und Fahrtrichtung des Motors bereits konfiguriert wurden.",
           "data": {
             "name": "Name",
-            "already_setup": "Endpunkte und Fahrtrichtung müssen am Motor über die physische Fernbedienung eingestellt sein (siehe Bedienungsanleitung). Wurde das bereits gemacht?"
+            "already_setup": "Motor ist konfiguriert und bereit"
           }
         },
         "pairing_status": {
@@ -139,7 +139,7 @@
         },
         "channel": {
           "title": "Rollo einrichten",
-          "description": "Gib den gewünschten 2-stelligen Hex-Kanal dieses Rollos ein (z. B. 01, 0A, 1F, FF). Stelle sicher, dass Endpunkte und Fahrtrichtung am Motor bereits über die physische Fernbedienung eingestellt wurden.",
+          "description": "Gib den 2-stelligen Hex-Kanal ein, den du diesem Rollladen zuweisen möchtest (z.B. 01, 0A, 1F, FF). Stelle sicher, dass die Endpositionen und Fahrtrichtung des Motors bereits konfiguriert wurden.",
           "data": {
             "name": "Name",
             "channel": "Kanal (hex)"
@@ -167,7 +167,7 @@
           "title": "Kalibrierung",
           "description": "Der Rollo fährt automatisch in beide Richtungen, um die Fahrtzeiten zu messen.\n\n**Ablauf:**\n- Du wählst die Startrichtung (hoch oder runter)\n- Der Rollo startet sofort nach dem Klick auf OK\n- Wenn er die Endposition erreicht hat, auf OK klicken — Zeit wird gespeichert\n- Danach fährt er automatisch in die Gegenrichtung\n- Wieder auf OK klicken, wenn die Endposition erreicht ist\n\nStelle sicher, dass der Rollo vor dem Start an einer der beiden Endpositionen steht.",
           "data": {
-            "skip": "Kalibrierung überspringen (Standardwerte verwenden)"
+            "skip": "Kalibrierung überspringen (30 s Standardwert für beide Richtungen)"
           }
         },
         "calibration_direction": {
@@ -194,7 +194,7 @@
         },
         "signal_wait": {
           "title": "Taste drücken",
-          "description": "Drücke **{label}** auf der Fernbedienung, dann klicke auf OK."
+          "description": "Drücke **{label}** auf der Fernbedienung und klicke dann auf OK, um das Signal zu erfassen."
         },
         "signal_summary": {
           "title": "Gelernte Signale",
@@ -227,7 +227,7 @@
         },
         "pair_shutter": {
           "title": "Rollo {current} von {total} einlernen",
-          "description": "**{shutter_name}** wird jetzt mit dem Alle-Kanal eingelernt.\n\nDie Integration sendet den Anlernbefehl an diesen Rollo. Klicke auf OK um fortzufahren."
+          "description": "Bereit zum Koppeln von **{shutter_name}** mit dem Alle-Kanal.\n\nKlicke auf OK, um den Kopplungsbefehl zu senden. Der Rollladen sollte mit einem Piepton oder einer kurzen Bewegung reagieren. Die Einrichtung wird danach automatisch mit dem nächsten Rollladen fortgesetzt."
         },
         "pair_all": {
           "title": "Mit Alle-Kanal koppeln",
@@ -260,11 +260,11 @@
         },
         "remote_id_wait": {
           "title": "Fernbedienung erkennen",
-          "description": "Drücke die **STOP**-Taste auf der Fernbedienung, dann klicke auf OK."
+          "description": "Drücke die **STOP**-Taste auf der Fernbedienung und klicke dann auf OK. (STOP wird empfohlen, um ein versehentliches Auslösen der Rollläden zu vermeiden)"
         },
         "remote_id_confirm": {
           "title": "Fernbedienung erkannt",
-          "description": "Folgende Fernbedienung wurde erkannt:\n\n**Remote ID:** {remote_id}\n\nOK zur Zuweisung der Tasten zu Rollos."
+          "description": "Fernbedienung erkannt.\n\n**Remote-ID:** {remote_id}\n\nFahre fort, um die Tasten den Rollläden zuzuweisen."
         },
         "remote_reconfigure_menu": {
           "title": "Was möchtest du ändern?",
@@ -282,8 +282,8 @@
       },
       "abort": {
         "not_enough_shutters": "Es müssen mindestens 2 Rollos konfiguriert sein bevor eine Alle-Rollos-Entität erstellt werden kann.",
-        "motor_not_configured": "Der Motor muss zuerst über die physische Fernbedienung konfiguriert werden. Bitte die Bedienungsanleitung befolgen und das Setup danach neu starten.",
-        "pairing_failed": "Der Rollo hat nicht reagiert. Stelle sicher, dass er im Anlernmodus ist, und starte das Setup neu.",
+        "motor_not_configured": "Der Motor muss konfiguriert sein, bevor er hier hinzugefügt werden kann. Bitte folge der Bedienungsanleitung und versuche dann erneut, den Rollladen hinzuzufügen.",
+        "pairing_failed": "Der Rollladen hat nicht reagiert. Stelle sicher, dass er sich im Kopplungsmodus befindet (siehe Bedienungsanleitung), und versuche es erneut.",
         "reconfigure_successful": "Einstellungen wurden erfolgreich aktualisiert.",
         "all_already_exists": "Eine Alle-Rollos-Steuerung existiert bereits für diesen USB-Stick. Pro Gerät ist nur eine erlaubt.",
         "pair_all_successful": "Rollo erfolgreich mit dem Alle-Kanal gepaired.",

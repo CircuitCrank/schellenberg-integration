@@ -3,14 +3,14 @@
     "step": {
       "user": {
         "title": "Schellenberg USB Stick",
-        "description": "Select the USB stick from the list. The stable device path will be used automatically.",
+        "description": "Select the USB stick from the list.",
         "data": {
           "name": "Name",
           "serial_port": "USB Device",
           "send_repeat": "Send Repeat (1–15)"
         },
         "data_description": {
-          "send_repeat": "How many times each command is sent. Higher values improve reliability on weak signals. (default = 9)"
+          "send_repeat": "Number of send repetitions per command. (default: 9)\nHigher = more reliable.\nLower = faster"
         }
       }
     },
@@ -99,17 +99,17 @@
       "step": {
         "user": {
           "title": "What would you like to add?",
-          "description": "**Roller Shutter**: Add and configure a single shutter with its own channel and calibration.\n\n**All-Shutters Control**: Add a broadcast control that operates all paired shutters simultaneously on a shared channel.\n\n**Remote Control**: Add a physical remote control. Creates a sensor that tracks which button was pressed and on which shutter — usable in automations and visible in the history.",
+          "description": "**Roller Shutter**: Add and configure a single shutter with its own channel and calibration.\n\n**All-Shutters Control**: Add a broadcast control that operates all paired shutters simultaneously on a shared channel.\n\n**Remote Control**: Add a physical remote control. Assigns its buttons to shutters for position tracking — button presses are reflected in the shutter state.",
           "data": {
             "entry_type": "Type"
           }
         },
         "setup_mode": {
           "title": "Add Shutter",
-          "description": "Enter a name for this shutter.",
+          "description": "Enter a name for this shutter.\n\nBefore continuing, make sure the motor's end positions and travel direction have been configured.",
           "data": {
             "name": "Name",
-            "already_setup": "End positions and travel direction must be configured on the motor via the physical remote (see user manual). Have you done this?"
+            "already_setup": "Motor is configured and ready"
           }
         },
         "pairing_status": {
@@ -136,7 +136,7 @@
         },
         "channel": {
           "title": "Shutter Setup",
-          "description": "Enter the 2-digit hex channel you want to assign to this shutter (e.g. 01, 0A, 1F, FF). Make sure end positions and travel direction are already configured on the motor via the physical remote.",
+          "description": "Enter the 2-digit hex channel you want to assign to this shutter (e.g. 01, 0A, 1F, FF). Make sure the motor's end positions and travel direction have been configured.",
           "data": {
             "name": "Name",
             "channel": "Channel (hex)"
@@ -164,7 +164,7 @@
           "title": "Calibration",
           "description": "The shutter will move automatically in both directions to measure the travel times.\n\n**What will happen:**\n- You choose the start direction (up or down)\n- The shutter starts moving immediately after you click Submit\n- When it reaches the end position, click Submit to stop and measure\n- It then automatically moves in the opposite direction\n- Click Submit again when it reaches that end position\n\nMake sure the shutter is at one of the two end positions before continuing.",
           "data": {
-            "skip": "Skip calibration (use default values)"
+            "skip": "Skip calibration (use 30 s default for both directions)"
           }
         },
         "calibration_direction": {
@@ -191,7 +191,7 @@
         },
         "signal_wait": {
           "title": "Press Button",
-          "description": "Press **{label}** on the remote, then click Submit."
+          "description": "Press **{label}** on the remote, then click Submit to capture the signal."
         },
         "signal_summary": {
           "title": "Learned Signals",
@@ -224,7 +224,7 @@
         },
         "pair_shutter": {
           "title": "Pairing Shutter {current} of {total}",
-          "description": "Ready to pair **{shutter_name}** with the All channel.\n\nThe integration will now send a pairing command to this shutter. Click Submit to proceed."
+          "description": "Ready to pair **{shutter_name}** with the All channel.\n\nClick Submit to send the pairing command. The shutter should respond with a beep or brief movement. The setup will then automatically continue with the next shutter."
         },
         "pair_all": {
           "title": "Pair with All-Channel",
@@ -257,11 +257,11 @@
         },
         "remote_id_wait": {
           "title": "Identify Remote",
-          "description": "Press the **STOP** button on the remote, then click Submit."
+          "description": "Press the **STOP** button on the remote, then click Submit. (STOP is recommended to avoid accidentally triggering any shutters)"
         },
         "remote_id_confirm": {
           "title": "Remote Identified",
-          "description": "The following remote was detected:\n\n**Remote ID:** {remote_id}\n\nContinue to assign its buttons to shutters."
+          "description": "Remote detected.\n\n**Remote ID:** {remote_id}\n\nContinue to assign its buttons to shutters."
         },
         "remote_reconfigure_menu": {
           "title": "What would you like to change?",
@@ -279,8 +279,8 @@
       },
       "abort": {
         "not_enough_shutters": "At least 2 shutters must be configured before creating an All-Shutters entity.",
-        "motor_not_configured": "The motor must be configured via the physical remote before adding it here. Please follow the user manual, then restart the setup.",
-        "pairing_failed": "The shutter did not respond. Make sure it is in pairing mode and restart the setup.",
+        "motor_not_configured": "The motor must be configured before adding it here. Please follow the user manual, then try adding the shutter again.",
+        "pairing_failed": "The shutter did not respond. Make sure it is in pairing mode (see user manual), then try again.",
         "reconfigure_successful": "Settings updated successfully.",
         "all_already_exists": "An All-Shutters control already exists for this USB stick. Only one is allowed per device.",
         "pair_all_successful": "Shutter successfully paired with the All-channel.",
