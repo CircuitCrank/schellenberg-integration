@@ -2,7 +2,7 @@
   "domain": "schellenberg_integration",
   "name": "Schellenberg Integration",
   "version": "0.1.0",
-  "documentation": "https://github.com/HomeZnCld/schellenberg-integration",
+  "documentation": "https://github.com/CircuitCrank/schellenberg-integration",
   "dependencies": [],
   "codeowners": ["@HomeZnCld"],
   "requirements": ["pyserial-asyncio-fast==0.12"],
