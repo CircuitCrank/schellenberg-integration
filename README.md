@@ -32,13 +32,13 @@ Control Schellenberg roller shutters via USB stick directly from Home Assistant,
 
 ## Installation
 
-[![Add to Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=HomeZnCld&repository=schellenberg-integration&category=integration)
+[![Add to Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=CircuitCrank&repository=schellenberg-integration&category=integration)
 
 **Via HACS (recommended)**
 
 1. Open HACS in Home Assistant
 2. Go to **Integrations** → three-dot menu → **Custom repositories**
-3. Add `https://github.com/HomeZnCld/schellenberg-integration` — Category: **Integration**
+3. Add `https://github.com/CircuitCrank/schellenberg-integration` — Category: **Integration**
 4. Search for **Schellenberg USB** and install it
 5. Restart Home Assistant
 
