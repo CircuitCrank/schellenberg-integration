@@ -3,28 +3,33 @@
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
 [![HA Version](https://img.shields.io/badge/Home%20Assistant-2024.11%2B-blue)](https://www.home-assistant.io/)
 
-**Early development (v0.1.x)** – Breaking changes possible. Use at your own risk.
+A fully local Home Assistant integration for Schellenberg roller shutters! Designed to replace shell scripts, YAML hacks, and other workarounds with a clean, native implementation that actually tracks shutter positions.
 
-![Schellenberg Integration](logo.png)
+<img src="logo.png" alt="Schellenberg Integration" width="200"/>
 
-Control Schellenberg roller shutters via USB stick directly from Home Assistant, fully UI-configurable, no YAML required.
+## Why this exists
+
+Earlier setups relied on shell commands and YAML workarounds to control Schellenberg shutters. They work, until they don't. No real state handling, no UI integration, no reliable position tracking.
+
+This integration replaces all of that with a clean, fully native Home Assistant implementation.
 
 ## Features
 
-- **USB stick control:** sends commands directly to shutters via the Schellenberg Smart Home Funk-Stick
-- **Cover entities:** open, close, stop, set position (slider 0–100)
-- **Position tracking:** calibration-based, deterministic, persistent across restarts
-- **Calibration wizard:** guided setup per shutter, reconfigurable at any time
-- **All-shutters control:** optional dedicated channel to control all shutters simultaneously
-- **Remote support:** receive signals from physical Schellenberg remotes and sync shutter positions accordingly
-- **Fully UI-based:** setup and reconfiguration via Home Assistant config flow, no YAML
+- Fully UI-based configuration (no YAML required)
+- Direct USB control of Schellenberg roller shutters
+- Native Home Assistant cover entities (open, close, stop, set position)
+- Position tracking with calibration-based runtime measurement
+- Guided calibration wizard per shutter
+- Persistent state across restarts
+- Optional control of all shutters at once
+- Support for physical remote signal syncing
 
 ## Requirements
 
 **Hardware**
 
 - Schellenberg Smart Home Funk-Stick — [schellenberg-shop.de](https://schellenberg-shop.de/smart-home-funk-stick/21009)
-- Compatible shutters: RolloDrive 65 Premium, RolloDrive 75 Premium, Funk-Rollladenmotoren Premium (2020 generation)
+- Compatible roller shutter motors (e.g. RolloDrive 65/75 Premium series)
 
 **Software**
 
@@ -34,71 +39,65 @@ Control Schellenberg roller shutters via USB stick directly from Home Assistant,
 
 [![Add to Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=CircuitCrank&repository=schellenberg-integration&category=integration)
 
-**Via HACS (recommended)**
+### HACS (recommended)
 
 1. Open HACS in Home Assistant
-2. Go to **Integrations** → three-dot menu → **Custom repositories**
-3. Add `https://github.com/CircuitCrank/schellenberg-integration` — Category: **Integration**
-4. Search for **Schellenberg USB** and install it
+2. Add custom repository: `https://github.com/CircuitCrank/schellenberg-integration`
+3. Select category: Integration
+4. Install "Schellenberg Integration"
 5. Restart Home Assistant
 
-**Manual**
+### Manual
 
-1. Copy the `custom_components/schellenberg_integration/` folder into your HA config directory
-2. Restart Home Assistant
+Copy `custom_components/schellenberg_integration/` into your Home Assistant config directory and restart.
 
 ## Setup
 
 **1. Add Integration**
 
-Go to **Settings → Devices & Services → Add Integration** and search for **Schellenberg Integration**. You will be asked to enter a name, choose the USB device from the dropdown and a send repeat count.
-
-The USB-Stick will be added as a device with a "USB Raw" sensor entity.
+Go to **Settings → Devices & Services → Add Integration** and search for **Schellenberg Integration**. Enter a name, select the USB device from the dropdown, and set a send repeat count.
 
 **2. Add Shutters**
 
-Go to **Settings → Devices & Services → Integrations → Schellenberg Integration** and click the **`+`** button (top right).
-Select type **Roller Shutter** and follow the guided setup — pair the shutter if needed, then run the calibration wizard which measures the full travel time in both directions.
+Click the **`+`** button in the integration, select **Roller Shutter**, and follow the guided setup — pair the shutter if needed, then run the calibration wizard to measure full travel time in both directions.
 
 **3. All-Shutters Control (optional)**
 
-Go to **Settings → Devices & Services → Integrations → Schellenberg Integration** and click the **`+`** button (top right).
-Select type **All-Shutters Control** to create a control entity that broadcasts to all shutters on a dedicated channel.
+Click the **`+`** button and select **All-Shutters Control** to create a control entity that broadcasts to all shutters on a dedicated channel.
 
 **4. Remote Control (optional)**
 
-Go to **Settings → Devices & Services → Integrations → Schellenberg Integration** and click the **`+`** button (top right).
-Select type **Remote Control** to add a sensor that listens for incoming signals from physical Schellenberg remotes and keeps the shutter positions in Home Assistant in sync.
+Click the **`+`** button and select **Remote Control** to add a sensor that listens for incoming signals from physical Schellenberg remotes and keeps shutter positions in sync.
 
-## Reconfiguration
+All settings can be changed later via the **⚙** icon next to the respective entry.
 
-All settings can be changed later via **Settings → Devices & Services → Integrations → Schellenberg Integration**. Click the **⚙** icon next to the entry you want to reconfigure.
+## Notes
+
+- This is early-stage software (v0.1.x). Breaking changes may occur.
+- Calibration is required for accurate position tracking.
+- USB passthrough must be correctly configured in virtualized environments (e.g. Proxmox USB passthrough, not just the host path).
 
 ## Troubleshooting
 
 **USB stick not detected**
 
-If it is not found, check the following:
-
-- Verify the stick is physically connected
-- If Home Assistant runs in a VM, ensure the USB device is passed through correctly (e.g. in Proxmox via USB passthrough, not just the host path)
-- Run `ls /dev/serial/by-id/` in the HA terminal to confirm the device is visible to the OS
+Check that the stick is physically connected. Run `ls /dev/serial/by-id/` in the HA terminal to verify the device is visible to the OS. In virtualized environments, ensure the USB device is passed through to the VM, not just the host.
 
 **USB stick disconnects intermittently**
 
-This is often caused by insufficient power delivery from the host USB port. Using an externally powered USB hub is recommended.
+Usually caused by insufficient power delivery. Use an externally powered USB hub.
 
 **Shutter does not respond**
 
-Verify the channel number matches the paired shutter and re-run pairing if needed.
+Verify the channel number matches the paired shutter and re-run pairing if needed. If pairing is correct, check USB stick placement (it should be centrally located and not obstructed by metal surfaces).
 
-**Position is inaccurate after movement**
+**Position is inaccurate**
 
 Re-run the calibration wizard for the affected shutter.
 
 **Remote signals not received**
 
-Ensure the remote is within range and check the HA logs for incoming raw signals from the integration.
+Ensure the remote is within range and check the HA logs for incoming raw signals.
 
 ## Credits
 
