@@ -115,7 +115,7 @@
         },
         "setup_mode": {
           "title": "Rollo hinzufügen",
-          "description": "Gib einen Namen für diesen Rollladen ein.\n\nStelle sicher, dass die Endpositionen und Fahrtrichtung des Motors bereits konfiguriert wurden.",
+          "description": "Gib einen Namen für diesen Rollladen ein.\n\nStelle sicher, dass die Endpositionen und Fahrtrichtung des Motors bereits konfiguriert wurden.\n\n⚠️ Empfehlung: Trenne alle anderen Rollomotoren während des Anlernens vom Strom, um versehentliche Kopplungen zu vermeiden.",
           "data": {
             "name": "Name",
             "already_setup": "Motor ist konfiguriert und bereit"
@@ -123,7 +123,7 @@
         },
         "pairing_status": {
           "title": "Kanal & Pairing",
-          "description": "Gib den 2-stelligen Hex-Kanal dieses Rollos ein (z. B. 01, 0A, 1F, FF).",
+          "description": "Gib den 2-stelligen Hex-Kanal dieses Rollos ein (z. B. 02, 0A, 1F, FF).",
           "data": {
             "channel": "Kanal (hex)",
             "already_paired": "Wurde er bereits mit dem USB-Stick gepaired?"
@@ -134,7 +134,7 @@
         },
         "pair_quick": {
           "title": "Anlernbefehl senden",
-          "description": "Versetz den Rollo-Motor in den Anlernmodus (gemäss Bedienungsanleitung). Klicke dann auf OK um den Anlernbefehl zu senden. Beobachte den Rollo — er sollte mit einem Piepton oder einer kurzen Bewegung reagieren."
+          "description": "Versetz den Rollo-Motor in den Anlernmodus (gemäss Bedienungsanleitung). Klicke dann auf OK um den Anlernbefehl zu senden. Beobachte den Rollo — er sollte mit einem Piepton oder einer kurzen Bewegung reagieren.\n\n⚠️ Empfehlung: Trenne alle anderen Rollomotoren während des Anlernens vom Strom."
         },
         "pair_confirm": {
           "title": "Pairing bestätigen",
@@ -145,7 +145,7 @@
         },
         "channel": {
           "title": "Rollo einrichten",
-          "description": "Gib den 2-stelligen Hex-Kanal ein, den du diesem Rollladen zuweisen möchtest (z.B. 01, 0A, 1F, FF). Stelle sicher, dass die Endpositionen und Fahrtrichtung des Motors bereits konfiguriert wurden.",
+          "description": "Gib den 2-stelligen Hex-Kanal ein, den du diesem Rollladen zuweisen möchtest (z.B. 02, 0A, 1F, FF). Stelle sicher, dass die Endpositionen und Fahrtrichtung des Motors bereits konfiguriert wurden.",
           "data": {
             "name": "Name",
             "channel": "Kanal (hex)"
@@ -200,11 +200,11 @@
         },
         "signal_wait": {
           "title": "Taste drücken",
-          "description": "Drücke die **{label}**-Taste auf der Fernbedienung und klicke dann auf OK."
+          "description": "Drücke eine beliebige Taste auf der Fernbedienung für **{label}** und klicke dann auf OK."
         },
         "signal_summary": {
           "title": "Gelernte Signale",
-          "description": "Folgende Signale wurden eingelernt:\n\n{summary}"
+          "description": "Signalformat: ss[KANAL]REMOTE_ID[CMD]\n\nFolgende Signale wurden eingelernt:\n\n{summary}"
         },
         "signal_all_prompt": {
           "title": "ALLE-Befehle",
@@ -221,7 +221,7 @@
         },
         "all_channel": {
           "title": "Alle-Rollos einrichten",
-          "description": "Wähle einen Namen und weise einen dedizierten Hex-Kanal für diese Gruppe (z.B. 01, 0A, 1F, FF). Alle Rollos müssen auf diesen Kanal eingelernt sein, damit sie auf die Broadcast-Befehle reagieren.\n\nWenn die Rollos bereits mit diesem Kanal gepaired wurden (z.B. während eines früheren Setups), wähle unten Ja. Andernfalls wähle Nein, um den Kopplungsvorgang jetzt zu starten.",
+          "description": "Wähle einen Namen und weise einen dedizierten Hex-Kanal für diese Gruppe (z.B. 02, 0A, 1F, FF). Alle Rollos müssen auf diesen Kanal eingelernt sein, damit sie auf die Broadcast-Befehle reagieren.\n\nWenn die Rollos bereits mit diesem Kanal gepaired wurden (z.B. während eines früheren Setups), wähle unten Ja. Andernfalls wähle Nein, um den Kopplungsvorgang jetzt zu starten.",
           "data": {
             "name": "Name",
             "channel": "Kanal (hex)",
@@ -241,7 +241,7 @@
         },
         "pair_quick_reconf": {
           "title": "Anlernbefehl senden",
-          "description": "Versetz den Rollomotor in den Anlernmodus (gemäss Bedienungsanleitung). Klicke dann auf OK um den Anlernbefehl zu senden."
+          "description": "Versetz den Rollomotor in den Anlernmodus (gemäss Bedienungsanleitung). Klicke dann auf OK um den Anlernbefehl zu senden.\n\n⚠️ Empfehlung: Trenne alle anderen Rollomotoren während des Anlernens vom Strom."
         },
         "pairing_check": {
           "title": "Neu einlernen?",
@@ -284,7 +284,8 @@
         "channel_in_use": "Dieser Kanal ist bereits einem anderen Rollo zugewiesen. Bitte einen anderen Kanal wählen.",
         "no_direction_selected": "Bitte eine Richtung wählen oder 'Kalibrierung überspringen' aktivieren.",
         "no_signal_received": "Kein Signal empfangen. Drücke die Taste auf der Fernbedienung, dann klicke auf OK.",
-        "no_shutter_selected": "Bitte mindestens einen Rolladen auswählen."
+        "no_shutter_selected": "Bitte mindestens einen Rolladen auswählen.",
+        "channel_reserved": "Dieser Kanal ist für physische Fernbedienungen reserviert und kann nicht für Rollos verwendet werden."
       },
       "abort": {
         "not_enough_shutters": "Es müssen mindestens 2 Rollos konfiguriert sein bevor eine Alle-Rollos-Entität erstellt werden kann.",

@@ -112,7 +112,7 @@
         },
         "setup_mode": {
           "title": "Add Shutter",
-          "description": "Enter a name for this shutter.\n\nBefore continuing, make sure the motor's end positions and travel direction have been configured.",
+          "description": "Enter a name for this shutter.\n\nBefore continuing, make sure the motor's end positions and travel direction have been configured.\n\n⚠️ Recommendation: disconnect all other shutter motors from power during pairing to avoid accidental pairings.",
           "data": {
             "name": "Name",
             "already_setup": "Motor is configured and ready"
@@ -120,7 +120,7 @@
         },
         "pairing_status": {
           "title": "Channel & Pairing",
-          "description": "Enter the 2-digit hex channel assigned to this shutter (e.g. 01, 0A, 1F, FF).",
+          "description": "Enter the 2-digit hex channel assigned to this shutter (e.g. 02, 0A, 1F, FF).",
           "data": {
             "channel": "Channel (hex)",
             "already_paired": "Was it already paired with the USB stick?"
@@ -131,7 +131,7 @@
         },
         "pair_quick": {
           "title": "Send Pairing Command",
-          "description": "Put the shutter motor into pairing mode (according to the user manual). Then click Submit to send the pairing command. Watch the shutter — it should respond with a beep or brief movement."
+          "description": "Put the shutter motor into pairing mode (according to the user manual). Then click Submit to send the pairing command. Watch the shutter — it should respond with a beep or brief movement.\n\n⚠️ Recommendation: disconnect all other shutter motors from power during pairing."
         },
         "pair_confirm": {
           "title": "Pairing Confirmation",
@@ -142,7 +142,7 @@
         },
         "channel": {
           "title": "Shutter Setup",
-          "description": "Enter the 2-digit hex channel you want to assign to this shutter (e.g. 01, 0A, 1F, FF). Make sure the motor's end positions and travel direction have been configured.",
+          "description": "Enter the 2-digit hex channel you want to assign to this shutter (e.g. 02, 0A, 1F, FF). Make sure the motor's end positions and travel direction have been configured.",
           "data": {
             "name": "Name",
             "channel": "Channel (hex)"
@@ -197,11 +197,11 @@
         },
         "signal_wait": {
           "title": "Press Button",
-          "description": "Press the **{label}** button on the remote, then click Submit to capture the signal."
+          "description": "Press any button on the remote for **{label}**, then click Submit to capture the signal."
         },
         "signal_summary": {
           "title": "Learned Signals",
-          "description": "The following signals were learned:\n\n{summary}"
+          "description": "Signal format: ss[CHANNEL]REMOTE_ID[CMD]\n\nThe following signals were learned:\n\n{summary}"
         },
         "signal_all_prompt": {
           "title": "ALL Commands",
@@ -218,7 +218,7 @@
         },
         "all_channel": {
           "title": "All-Shutters Setup",
-          "description": "Choose a name and assign a dedicated hex channel for this group (e.g. 01, 0A, 1F, FF). All shutters must be paired to this channel so they respond to the broadcast commands.\n\nIf you have already paired the shutters with this channel (e.g. in previous setup), select Yes below. Otherwise select No to start the pairing process now.",
+          "description": "Choose a name and assign a dedicated hex channel for this group (e.g. 02, 0A, 1F, FF). All shutters must be paired to this channel so they respond to the broadcast commands.\n\nIf you have already paired the shutters with this channel (e.g. in previous setup), select Yes below. Otherwise select No to start the pairing process now.",
           "data": {
             "name": "Name",
             "channel": "Channel (hex)",
@@ -238,7 +238,7 @@
         },
         "pair_quick_reconf": {
           "title": "Send Pairing Command",
-          "description": "Put the shutter motor into pairing mode (according to the user manual). Then click Submit to send the pairing command."
+          "description": "Put the shutter motor into pairing mode (according to the user manual). Then click Submit to send the pairing command.\n\n⚠️ Recommendation: disconnect all other shutter motors from power during pairing."
         },
         "pairing_check": {
           "title": "Pairing Required?",
@@ -281,7 +281,8 @@
         "channel_in_use": "This channel is already assigned to another shutter. Choose a different channel.",
         "no_direction_selected": "Please select a direction or check 'Skip calibration'.",
         "no_signal_received": "No signal received. Press the button on the remote, then click Submit.",
-        "no_shutter_selected": "Please select at least one shutter."
+        "no_shutter_selected": "Please select at least one shutter.",
+        "channel_reserved": "This channel is reserved for physical remote controls and cannot be used for shutters."
       },
       "abort": {
         "not_enough_shutters": "At least 2 shutters must be configured before creating an All-Shutters entity.",

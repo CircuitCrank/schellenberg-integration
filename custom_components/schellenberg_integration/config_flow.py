@@ -276,6 +276,8 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
                     used = _get_used_channels(self.config_entry)
                     if channel in used:
                         errors["base"] = "channel_in_use"
+                    elif channel in (0x01, 0x11, 0x21, 0x31, 0x41, 0x51):
+                        errors["base"] = "channel_reserved"
                     else:
                         self._data[CONF_CHANNEL] = channel
                         if user_input.get("already_paired") != "yes":
@@ -315,6 +317,8 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
                     existing_channel = self._existing(CONF_CHANNEL)
                     if channel in used and channel != existing_channel:
                         errors["base"] = "channel_in_use"
+                    elif channel in (0x01, 0x11, 0x21, 0x31, 0x41, 0x51):
+                        errors["base"] = "channel_reserved"
                     else:
                         self._data[CONF_CHANNEL] = channel
                         self._data["subentry_type"] = SUBENTRY_TYPE_SHUTTER
@@ -365,7 +369,7 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
     async def async_step_pair_confirm_reconf(self, user_input=None):
         if user_input is not None:
             if user_input.get("paired") != "yes":
-                return self.async_abort(reason="pairing_failed")
+                return await self.async_step_pair_quick_reconf()
             return self._finish_shutter()
 
         return self.async_show_form(
@@ -392,7 +396,7 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
     async def async_step_pair_confirm(self, user_input=None):
         if user_input is not None:
             if user_input.get("paired") != "yes":
-                return self.async_abort(reason="pairing_failed")
+                return await self.async_step_pair_quick()
             return await self.async_step_calibration_intro()
 
         return self.async_show_form(
@@ -533,11 +537,9 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
                 if subentry is None:
                     continue
                 name = subentry.data.get(CONF_NAME, subentry.title)
-                self._signal_queue += [
-                    {"key": CONF_SIGNAL_UP,   "shutter_id": sid, "label": f"UP — {name}"},
-                    {"key": CONF_SIGNAL_STOP, "shutter_id": sid, "label": f"STOP — {name}"},
-                    {"key": CONF_SIGNAL_DOWN, "shutter_id": sid, "label": f"DOWN — {name}"},
-                ]
+                self._signal_queue.append(
+                    {"shutter_id": sid, "label": name},
+                )
             if not self._signal_queue:
                 return self.async_show_form(
                     step_id="signal_select_shutters",
@@ -598,14 +600,17 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
 
             raw = self._last_signal
             self._last_signal = None
-            pattern = raw[2:4] + raw[10:12]
+            channel = raw[2:4]
             remote_id = raw[4:10]
 
             item = self._signal_queue[self._current_queue_index]
             sid = item["shutter_id"]
-            self._learned.setdefault(sid, {})[item["key"]] = pattern
-            if CONF_REMOTE_ID not in self._learned[sid]:
-                self._learned[sid][CONF_REMOTE_ID] = remote_id
+            self._learned[sid] = {
+                CONF_REMOTE_ID:    remote_id,
+                CONF_SIGNAL_STOP:  channel + "00",
+                CONF_SIGNAL_UP:    channel + "01",
+                CONF_SIGNAL_DOWN:  channel + "02",
+            }
 
             self._current_queue_index += 1
             if self._current_queue_index < len(self._signal_queue):
@@ -626,18 +631,16 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
 
     async def async_step_signal_summary(self, user_input=None):
         if user_input is not None:
-            return await self.async_step_signal_all_prompt()
+            return self._finish_signal_learning()
 
         shutters = _get_shutter_subentries(self.config_entry)
         lines = []
         for sid, signals in self._learned.items():
             subentry = next((s for s in shutters if s.subentry_id == sid), None)
             name = subentry.data.get(CONF_NAME, subentry.title) if subentry else sid
-            remote = signals.get(CONF_REMOTE_ID, "?")
-            up   = signals.get(CONF_SIGNAL_UP,   "–")
-            stop = signals.get(CONF_SIGNAL_STOP,  "–")
-            down = signals.get(CONF_SIGNAL_DOWN,  "–")
-            lines.append(f"{name} — UP: {up} | STOP: {stop} | DOWN: {down} (Remote: {remote})")
+            remote_id = signals.get(CONF_REMOTE_ID, "??????")
+            channel = signals.get(CONF_SIGNAL_STOP, "??00")[:2]
+            lines.append(f"**{name}**: ss**[{channel}]**{remote_id}**[00]**")
         summary = "\n".join(lines) if lines else "–"
 
         return self.async_show_form(
@@ -646,39 +649,11 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
             description_placeholders={"summary": summary},
         )
 
-    async def async_step_signal_all_prompt(self, user_input=None):
-        if _get_all_subentry(self.config_entry) is None:
-            return self._finish_signal_learning()
-
-        if user_input is not None:
-            if user_input.get("learn_all") == "yes":
-                self._signal_queue = [
-                    {"key": CONF_SIGNAL_ALL_UP,   "shutter_id": "__all__", "label": "ALL-UP"},
-                    {"key": CONF_SIGNAL_ALL_STOP, "shutter_id": "__all__", "label": "ALL-STOP"},
-                    {"key": CONF_SIGNAL_ALL_DOWN, "shutter_id": "__all__", "label": "ALL-DOWN"},
-                ]
-                self._current_queue_index = 0
-                return await self.async_step_signal_wait()
-            return self._finish_signal_learning()
-
-        return self.async_show_form(
-            step_id="signal_all_prompt",
-            data_schema=vol.Schema({
-                vol.Required("learn_all"): SelectSelector(SelectSelectorConfig(
-                    options=["yes", "no"],
-                    mode=SelectSelectorMode.LIST,
-                    translation_key="learn_all",
-                )),
-            }),
-        )
-
     def _finish_signal_learning(self):
         self._cleanup_signal_cb()
         shutters = _get_shutter_subentries(self.config_entry)
 
         for sid, signals in self._learned.items():
-            if sid == "__all__":
-                continue
             subentry = next((s for s in shutters if s.subentry_id == sid), None)
             if subentry is None:
                 continue
@@ -689,15 +664,18 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
                 data={**subentry.data, **shutter_signals},
             )
 
-        all_signals = self._learned.get("__all__", {})
-        if all_signals:
-            all_subentry = _get_all_subentry(self.config_entry)
-            if all_subentry is not None:
-                self.hass.config_entries.async_update_subentry(
-                    self.config_entry,
-                    all_subentry,
-                    data={**all_subentry.data, **all_signals},
-                )
+        all_subentry = _get_all_subentry(self.config_entry)
+        if all_subentry is not None:
+            self.hass.config_entries.async_update_subentry(
+                self.config_entry,
+                all_subentry,
+                data={
+                    **all_subentry.data,
+                    CONF_SIGNAL_ALL_UP:   "0101",
+                    CONF_SIGNAL_ALL_STOP: "0100",
+                    CONF_SIGNAL_ALL_DOWN: "0102",
+                },
+            )
 
         if self._is_reconfigure():
             return self.async_abort(reason="reconfigure_successful")
@@ -865,6 +843,8 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
                     )
                     if channel in used and channel != existing_channel:
                         errors["base"] = "channel_in_use"
+                    elif channel in (0x01, 0x11, 0x21, 0x31, 0x41, 0x51):
+                        errors["base"] = "channel_reserved"
                     else:
                         self._data[CONF_CHANNEL] = channel
                         self._data[CONF_NAME] = user_input.get(CONF_NAME, "All Shutters")
