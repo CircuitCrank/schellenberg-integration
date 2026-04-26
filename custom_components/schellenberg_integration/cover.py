@@ -136,6 +136,7 @@ class SchellenbergCover(CoverEntity, RestoreEntity):
         self._worker_event = asyncio.Event()
         self._worker_task: asyncio.Task | None = None
         self._worker_shutdown = False
+        self._state_listeners: list = []
 
     @property
     def _channel(self) -> int:
@@ -209,6 +210,11 @@ class SchellenbergCover(CoverEntity, RestoreEntity):
                 pass
 
         await self._cancel_movement(send_stop=False)
+
+    def async_write_ha_state(self) -> None:
+        super().async_write_ha_state()
+        for cb in self._state_listeners:
+            cb()
 
     async def _save_position(self) -> None:
         if self._position is None:
@@ -525,11 +531,18 @@ class SchellenbergAllCover(CoverEntity):
         self._usb.register_signal_callback(self._on_signal)
         self._usb.register_disconnect_callback(self._on_disconnect)
         self._usb.register_reconnect_callback(self._on_reconnect)
+        for cover in self._covers:
+            cover._state_listeners.append(self.async_write_ha_state)
 
     async def async_will_remove_from_hass(self) -> None:
         self._usb.unregister_signal_callback(self._on_signal)
         self._usb.unregister_disconnect_callback(self._on_disconnect)
         self._usb.unregister_reconnect_callback(self._on_reconnect)
+        for cover in self._covers:
+            try:
+                cover._state_listeners.remove(self.async_write_ha_state)
+            except ValueError:
+                pass
 
     def _on_signal(self, raw: str) -> None:
         if len(raw) < 12:
