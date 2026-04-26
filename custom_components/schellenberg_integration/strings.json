@@ -87,7 +87,6 @@
     "remote_reconfigure_action": {
       "options": {
         "remote_name": "Change name",
-        "remote_id": "Re-learn remote (replace remote control)",
         "signals": "Update shutter signal assignments"
       }
     },
@@ -201,7 +200,7 @@
         },
         "signal_summary": {
           "title": "Learned Signals",
-          "description": "Signal format: ss[CHANNEL]REMOTE_ID[CMD]\n\nThe following signals were learned:\n\n{summary}"
+          "description": "Signal format: ss [CHANNEL] REMOTE_ID [CMD]\n\nThe following signals were learned:\n\n{summary}"
         },
         "signal_all_prompt": {
           "title": "ALL Commands",

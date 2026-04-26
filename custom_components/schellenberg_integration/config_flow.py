@@ -758,21 +758,13 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
             action = user_input.get("reconfigure_action")
             if action == "remote_name":
                 return await self.async_step_remote_setup()
-            if action == "remote_id":
-                self._last_signal = None
-                if not self._signal_cb_registered:
-                    usb = _get_usb(self.hass, self.config_entry.entry_id)
-                    if usb:
-                        usb.register_signal_callback(self._on_signal_received)
-                        self._signal_cb_registered = True
-                return await self.async_step_remote_id_wait()
             return await self.async_step_signal_select_shutters()
 
         return self.async_show_form(
             step_id="remote_reconfigure_menu",
             data_schema=vol.Schema({
                 vol.Required("reconfigure_action"): SelectSelector(SelectSelectorConfig(
-                    options=["remote_name", "remote_id", "signals"],
+                    options=["remote_name", "signals"],
                     mode=SelectSelectorMode.LIST,
                     translation_key="remote_reconfigure_action",
                 )),

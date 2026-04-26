@@ -90,7 +90,6 @@
     "remote_reconfigure_action": {
       "options": {
         "remote_name": "Name ändern",
-        "remote_id": "Fernbedienung neu einlernen (FB ersetzen)",
         "signals": "Rollozuweisungen aktualisieren"
       }
     },
@@ -204,7 +203,7 @@
         },
         "signal_summary": {
           "title": "Gelernte Signale",
-          "description": "Signalformat: ss[KANAL]REMOTE_ID[CMD]\n\nFolgende Signale wurden eingelernt:\n\n{summary}"
+          "description": "Signalformat: ss [KANAL] REMOTE_ID [CMD]\n\nFolgende Signale wurden eingelernt:\n\n{summary}"
         },
         "signal_all_prompt": {
           "title": "ALLE-Befehle",
