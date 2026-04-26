@@ -522,12 +522,27 @@ class SchellenbergAllCover(CoverEntity):
         return False
 
     async def async_added_to_hass(self) -> None:
+        self._usb.register_signal_callback(self._on_signal)
         self._usb.register_disconnect_callback(self._on_disconnect)
         self._usb.register_reconnect_callback(self._on_reconnect)
 
     async def async_will_remove_from_hass(self) -> None:
+        self._usb.unregister_signal_callback(self._on_signal)
         self._usb.unregister_disconnect_callback(self._on_disconnect)
         self._usb.unregister_reconnect_callback(self._on_reconnect)
+
+    def _on_signal(self, raw: str) -> None:
+        if len(raw) < 12:
+            return
+        data = self._subentry.data
+        pattern = _extract_pattern(raw)
+
+        if pattern == data.get(CONF_SIGNAL_ALL_UP):
+            self.hass.async_create_task(self.async_open_cover())
+        elif pattern == data.get(CONF_SIGNAL_ALL_DOWN):
+            self.hass.async_create_task(self.async_close_cover())
+        elif pattern == data.get(CONF_SIGNAL_ALL_STOP):
+            self.hass.async_create_task(self.async_stop_cover())
 
     def _on_disconnect(self) -> None:
         self._attr_available = False
