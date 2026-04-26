@@ -640,7 +640,7 @@ class SchellenbergShutterSubEntryFlow(config_entries.ConfigSubentryFlow):
             name = subentry.data.get(CONF_NAME, subentry.title) if subentry else sid
             remote_id = signals.get(CONF_REMOTE_ID, "??????")
             channel = signals.get(CONF_SIGNAL_STOP, "??00")[:2]
-            lines.append(f"**{name}**: ss**[{channel}]**{remote_id}**[00]**")
+            lines.append(f"**{name}**: ss **[{channel}]** {remote_id} **[00]**")
         summary = "\n".join(lines) if lines else "–"
 
         return self.async_show_form(
